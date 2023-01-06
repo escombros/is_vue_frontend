@@ -131,9 +131,9 @@
             class="demo-ruleForm"
           >
             <el-form-item label="CURP" prop="pass">
-              <el-input class="el-input"  autocomplete="off" />
+              <el-input class="el-input" v-model="registro.curp" autocomplete="off" />
             </el-form-item>
-            <el-form-item label="CORREO ELECTRÓNICO" prop="checkPass">
+            <el-form-item label="CORREO ELECTRÓNICO" v-model="registro.correo" prop="checkPass">
               <el-input
                 class="el-input"
                 autocomplete="off"
@@ -141,7 +141,7 @@
             </el-form-item>
 
             <el-form-item>
-              <el-button type="danger" plain>Buscar</el-button>
+              <el-button type="danger" @click.stop.prevent="ruta()" plain>Buscaar</el-button>
             </el-form-item>
           </el-form>
         </div>
@@ -163,6 +163,10 @@ export default{
       consulta: {
         id: '',
         folio: ''
+      },
+      registro: {
+        curp: '',
+        correo: ''
       }
     }
   },
@@ -172,9 +176,66 @@ export default{
       this.llave = response.data
       console.log(this.llave)
     },
+    async ruta(){
+      this.$router.push({ name: 'about'})
+    },
     async consultarFUD(){
+      if(this.consulta.id=='' || this.consulta.folio==''){
+            this.$message({
+                showClose: false,
+                message: 'Ingrese su ID y Folio para buscar su registro',
+                type: 'error'
+              })
+          } else{
+                await axios.post('/user/login',this.consulta).then(response =>{
+                    if(response.data.success == false){
+                        this.$message({
+                            showClose: false,
+                            message: 'No se pudo encontrar su registro',
+                            type: 'error'
+                          })
+                    }else {
+                        this.$message({
+                        type: 'success',
+                        showClose: false,
+                        message: 'Registro Encontrado',
+                      })
+                      axios.defaults.headers.common['Authorization']=response.data.data['token_type'] + " " + response.data.data['access_token'];
+                      localStorage.setItem('token',response.data.data['access_token'])
+                      this.$router.push('about');
+                    }
+                  }
+                )
+            }
+    },
+    async pruebaruta(){
+      this.$router.push('about')
+    },
+    async registrarFUD(){
       await axios.post('/user/login',this.consulta).then(response =>{
           console.log(response);
+          if(this.consulta.id=='' || this.consulta.folio==''){
+            this.$message({
+                showClose: false,
+                message: 'Ingrese su Curp y Correo para buscar su registro',
+                type: 'error'
+              })
+          } else{
+
+            if(response.data.success == false){
+              this.$message({
+                  showClose: false,
+                  message: 'No se pudo encontrar su registro',
+                  type: 'error'
+                })
+            }else {
+              this.$message({
+              type: 'success',
+              showClose: false,
+              message: 'Registro Encontrado',
+            })
+            }
+          }
         }
       )
     }
