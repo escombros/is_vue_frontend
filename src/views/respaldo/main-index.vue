@@ -56,6 +56,19 @@
       </p>
       <br>
     </el-col>
+    <el-col :span="9" :offset="3">
+      <br>
+        <h1 class="h1">
+         INICIA TU DENUNCIA<br>
+        </h1>
+       <p>
+        Llena el formulario debajo para iniciar <br>
+        con tu pre-registro del Formato<br>
+        Único de Declaracion (FUD) y dar seguimiento <br>
+        a tu denuncia.
+      </p>
+      <br>
+    </el-col>
   </el-row>
     <el-row class="margin-bottom-2" type="flex" wstyle="width: 100% height: 50%" >
     <el-col :span="7" :offset="2">
@@ -78,13 +91,40 @@
               />
             </el-form-item>
             <el-form-item>
-              <el-button class="butonclass" type="danger" @click.stop.prevent="gotoRegister()" plain>Buscar</el-button>
+              <el-button class="butonclass" type="danger" @click.stop.prevent="consultarFUD()" plain>Buscar</el-button>
             </el-form-item>
           </el-form>
         </div>
       </el-card>
     </strong>
   </el-col>
+  <el-col :span="8" :offset="4">
+  <strong>
+      <el-card class="box-card">
+        <div class="text item">
+          <el-form
+            status-icon
+            label-width="120px"
+            class="demo-ruleForm"
+          >
+            <el-form-item label="CURP" prop="pass">
+              <el-input class="elinput" v-model="registro.curp" autocomplete="off" />
+            </el-form-item>
+            <el-form-item label="CORREO" v-model="registro.correo" prop="checkPass">
+              <el-input
+                class="elinput"
+                autocomplete="off"
+              />
+            </el-form-item>
+
+            <el-form-item>
+              <el-button class="butonclass" type="danger" @click.stop.prevent="ruta()" plain>Buscar</el-button>
+            </el-form-item>
+          </el-form>
+        </div>
+      </el-card>
+    </strong>
+    </el-col>
 </el-row>
 <footer class="footer">
   <div class="container px-4 px-lg-5"><p class="textfooter"><br>ESCOM &copy; FUD</p></div>
@@ -146,9 +186,6 @@ export default{
                   }
                 )
             }
-    },
-    async gotoRegister(){
-      this.$router.push('register')
     },
     async pruebaruta(){
       this.$router.push('about')
