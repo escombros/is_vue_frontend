@@ -85,6 +85,36 @@
       </el-card>
     </strong>
   </el-col>
+<<<<<<< HEAD
+=======
+  <el-col :span="8" :offset="4">
+  <strong>
+      <el-card class="box-card">
+        <div class="text item">
+          <el-form
+            status-icon
+            label-width="120px"
+            class="demo-ruleForm"
+          >
+            <el-form-item label="CURP" prop="pass">
+              <el-input class="el-input" v-model="registro.curp" autocomplete="off" />
+            </el-form-item>
+            <el-form-item label="CORREO ELECTRÓNICO" v-model="registro.correo" prop="checkPass">
+              <el-input
+                class="el-input"
+                autocomplete="off"
+              />
+            </el-form-item>
+
+            <el-form-item>
+              <el-button type="danger" @click.stop.prevent="ruta()" plain>Buscaar</el-button>
+            </el-form-item>
+          </el-form>
+        </div>
+      </el-card>
+    </strong>
+    </el-col>
+>>>>>>> b5201acfa199ea09f8c1e0a7f10d25bbdcb0d464
 </el-row>
 <footer class="footer">
   <div class="container px-4 px-lg-5"><p class="textfooter"><br>ESCOM &copy; FUD</p></div>
@@ -147,9 +177,12 @@ export default{
                 )
             }
     },
+<<<<<<< HEAD
     async gotoRegister(){
       this.$router.push('register')
     },
+=======
+>>>>>>> b5201acfa199ea09f8c1e0a7f10d25bbdcb0d464
     async pruebaruta(){
       this.$router.push('about')
     },

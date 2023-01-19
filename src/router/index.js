@@ -6,6 +6,7 @@ const routes = [
   {
     path: '/',
     name: 'home',
+<<<<<<< HEAD
     component: () => import('@/views/main/main-index'),
     hidden: true
   },
@@ -20,11 +21,19 @@ const routes = [
     name: 'register',
     component: () => import('@/views/register/main-index'),
     hidden: true
+=======
+    component: () => import('@/views/login/main-index'),
+    hidden: true
+>>>>>>> b5201acfa199ea09f8c1e0a7f10d25bbdcb0d464
   },
   {
     path: '/about',
     name: 'about',
+<<<<<<< HEAD
     component: () => import('@/views/user/main-index'),
+=======
+    component: () => import('@/views/usuario/main-index'),
+>>>>>>> b5201acfa199ea09f8c1e0a7f10d25bbdcb0d464
     meta: { requiresAuth: true }
   }
 ]
